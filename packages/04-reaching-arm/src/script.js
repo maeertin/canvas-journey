@@ -20,14 +20,14 @@ canvas.width = width
 canvas.height = height
 
 const armSystem = new ArmSystem({ x: centerX, y: centerY })
-for (let idx = 0; idx < 40; idx++) {
+for (let idx = 0; idx < 30; idx++) {
   armSystem.addArm(20)
 }
 
 function update() {
   context.clearRect(0, 0, width, height)
 
-  armSystem.drag(mouseX, mouseY)
+  armSystem.reach(mouseX, mouseY)
   armSystem.render(context)
 
   raf = requestAnimationFrame(update)
