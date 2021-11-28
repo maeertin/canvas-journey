@@ -2,7 +2,6 @@ import './style.css'
 import * as dat from 'dat.gui'
 
 const gui = new dat.GUI({ closed: true, width: 400 })
-const guiEl = document.querySelector('.dg.ac')
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 
@@ -89,7 +88,7 @@ document.addEventListener('mousemove', (event) => {
 })
 
 document.addEventListener('click', (event) => {
-  if (event.path.includes(guiEl)) return
+  if (event.path.includes(gui.domElement)) return
 
   if (event.shiftKey) {
     context.clearRect(0, 0, width, height)

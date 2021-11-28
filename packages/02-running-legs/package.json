@@ -1,5 +1,5 @@
 {
-  "name": "@maeertin/01-spinning-arrows",
+  "name": "@maeertin/02-running-legs",
   "version": "0.0.0",
   "private": false,
   "author": "Martin Barri",
@@ -7,7 +7,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/maeertin/canvas-journey.git",
-    "directory": "packages/01-spinning-arrows"
+    "directory": "packages/02-running-legs"
   },
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
