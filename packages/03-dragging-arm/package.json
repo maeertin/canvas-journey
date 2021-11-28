@@ -1,5 +1,5 @@
 {
-  "name": "@maeertin/03-reaching-arm",
+  "name": "@maeertin/03-dragging-arm",
   "version": "0.0.0",
   "private": false,
   "author": "Martin Barri",
@@ -7,7 +7,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/maeertin/canvas-journey.git",
-    "directory": "packages/03-reaching-arm"
+    "directory": "packages/03-dragging-arm"
   },
   "scripts": {
     "build": "webpack --config ./bundler/webpack.prod.js",
