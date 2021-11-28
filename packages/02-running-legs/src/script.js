@@ -1,6 +1,6 @@
 import './style.css'
 import * as dat from 'dat.gui'
-import FKSystem from './fksystem'
+import ArmSystem from './ArmSystem'
 
 const gui = new dat.GUI({ closed: true, width: 400 })
 const canvas = document.getElementById('canvas')
@@ -27,7 +27,7 @@ const options = {
 canvas.width = width
 canvas.height = height
 
-const leg0 = new FKSystem({ x: centerX, y: centerY })
+const leg0 = new ArmSystem({ x: centerX, y: centerY })
 leg0.addArm(
   options.topLength,
   options.topCenterAngle,
@@ -41,7 +41,7 @@ leg0.addArm(
   options.bottomPhaseOffset,
 )
 
-const leg1 = new FKSystem({ x: centerX, y: centerY, phase: Math.PI })
+const leg1 = new ArmSystem({ x: centerX, y: centerY, phase: Math.PI })
 leg1.addArm(
   options.topLength,
   options.topCenterAngle,

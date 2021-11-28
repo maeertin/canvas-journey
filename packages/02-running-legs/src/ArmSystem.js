@@ -1,6 +1,6 @@
-import Arm from './arm'
+import Arm from './Arm'
 
-class FKSystem {
+class ArmSystem {
   constructor(options = {}) {
     const { arms = [], lastArm = null, x = 0, y = 0, phase = 0, speed = 0.05 } = options
 
@@ -53,4 +53,4 @@ class FKSystem {
   }
 }
 
-export default FKSystem
+export default ArmSystem
