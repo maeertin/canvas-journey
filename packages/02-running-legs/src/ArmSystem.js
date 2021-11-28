@@ -2,10 +2,10 @@ import Arm from './Arm'
 
 class ArmSystem {
   constructor(options = {}) {
-    const { arms = [], lastArm = null, x = 0, y = 0, phase = 0, speed = 0.05 } = options
+    const { x = 0, y = 0, phase = 0, speed = 0.05 } = options
 
-    this.arms = arms
-    this.lastArm = lastArm
+    this.arms = []
+    this.lastArm = null
     this.x = x
     this.y = y
     this.phase = phase

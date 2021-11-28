@@ -1,11 +1,12 @@
 class Arm {
   constructor(options = {}) {
-    const { x = 0, y = 0, length = 100, angle = 0 } = options
+    const { x = 0, y = 0, length = 100, angle = 0, parent } = options
 
     this.x = x
     this.y = y
     this.length = length
     this.angle = angle
+    this.parent = parent
   }
 
   getEndX() {
@@ -14,15 +15,6 @@ class Arm {
 
   getEndY() {
     return this.y + Math.sin(this.angle) * this.length
-  }
-
-  render(context) {
-    context.strokeStyle = '#000000'
-    context.lineWidth = 5
-    context.beginPath()
-    context.moveTo(this.x, this.y)
-    context.lineTo(this.getEndX(), this.getEndY())
-    context.stroke()
   }
 
   lookAt(x, y) {
@@ -37,6 +29,19 @@ class Arm {
 
     this.x = x - Math.cos(this.angle) * this.length
     this.y = y - Math.sin(this.angle) * this.length
+
+    if (this.parent) {
+      this.parent.drag(this.x, this.y)
+    }
+  }
+
+  render(context) {
+    context.strokeStyle = '#000000'
+    context.lineWidth = 5
+    context.beginPath()
+    context.moveTo(this.x, this.y)
+    context.lineTo(this.getEndX(), this.getEndY())
+    context.stroke()
   }
 }
 
