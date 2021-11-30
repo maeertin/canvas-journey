@@ -1,6 +1,6 @@
 import './style.css'
 import * as dat from 'dat.gui'
-import Arrow from './Arrow'
+import ArrowSystem from './ArrowSystem'
 
 const gui = new dat.GUI({ closed: true, width: 400 })
 const canvas = document.getElementById('canvas')
@@ -11,8 +11,9 @@ const height = window.innerHeight
 const centerX = width / 2
 const centerY = height / 2
 const radius = Math.min(centerX / 2, centerY / 2)
-let tick = 0
-let raf, mouseX, mouseY
+let mouseX = centerX
+let mouseY = centerY
+let raf
 
 // const options = {
 //   arrowCount: 40,
@@ -27,25 +28,16 @@ let raf, mouseX, mouseY
 canvas.width = width
 canvas.height = height
 
-// function vector2(p0, p1) {
-//   return {
-//     x: p1.x - p0.x,
-//     y: p1.y - p0.y,
-//   }
-// }
-
-// const arrows = []
-// for (let i = 0; i < options.arrowCount; i++) {
-//   arrows[i] = new Arrow()
-// }
-
-const arrow = new Arrow({ x: centerX, y: centerY, length: 300 })
+const arrowSystem = new ArrowSystem({ x: centerX, y: centerY, lerpAmount: 0.1 })
+for (let idx = 0; idx < 20; idx++) {
+  arrowSystem.addArrow(40)
+}
 
 function update() {
   context.clearRect(0, 0, width, height)
 
-  arrow.lookAt(mouseX, mouseY)
-  arrow.render(context)
+  arrowSystem.follow(mouseX, mouseY)
+  arrowSystem.render(context)
 
   // console.log(arrow.angle)
   // const slice = (Math.PI * 2) / options.arrowCount

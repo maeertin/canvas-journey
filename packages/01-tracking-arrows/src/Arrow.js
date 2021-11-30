@@ -26,25 +26,23 @@ class Arrow {
     return this.y + Math.sin(this.angle) * this.halfLength
   }
 
-  getTopHeadX() {
+  getLeftHeadX() {
     return this.x - Math.cos(this.angle - Math.PI * 1.25) * this.arrowHeadLength
   }
 
-  getTopHeadY() {
+  getLeftHeadY() {
     return this.y - Math.sin(this.angle - Math.PI * 1.25) * this.arrowHeadLength
   }
 
-  getBottomHeadX() {
+  getRightHeadX() {
     return this.x - Math.cos(this.angle + Math.PI * 1.25) * this.arrowHeadLength
   }
 
-  getBottomHeadY() {
+  getRightHeadY() {
     return this.y - Math.sin(this.angle + Math.PI * 1.25) * this.arrowHeadLength
   }
 
   lookAt(x, y) {
-    if (!x || !y) return
-
     const dx = x - this.x
     const dy = y - this.y
 
@@ -52,27 +50,18 @@ class Arrow {
   }
 
   render(context) {
-    context.strokeStyle = 'rgba(0, 0, 0, 0.5)'
-    context.lineWidth = 5
+    context.strokeStyle = '#000000'
+    context.lineWidth = 1
     context.beginPath()
 
     context.moveTo(this.getBodyStartX(), this.getBodyStartY())
     context.lineTo(this.getBodyEndX(), this.getBodyEndY())
-    context.stroke()
 
-    context.strokeStyle = '#ff0000'
-    context.lineWidth = 5
-    context.beginPath()
     context.moveTo(this.getBodyEndX(), this.getBodyEndY())
-    context.lineTo(this.getTopHeadX(), this.getTopHeadY())
-    context.stroke()
+    context.lineTo(this.getLeftHeadX(), this.getLeftHeadY())
 
-    context.strokeStyle = '#ff0000'
-    context.lineWidth = 5
-    context.beginPath()
     context.moveTo(this.getBodyEndX(), this.getBodyEndY())
-    context.lineTo(this.getBottomHeadX(), this.getBottomHeadY())
-    context.stroke()
+    context.lineTo(this.getRightHeadX(), this.getRightHeadY())
 
     context.stroke()
   }
