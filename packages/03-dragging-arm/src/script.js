@@ -2,24 +2,19 @@ import './style.css'
 import * as dat from 'dat.gui'
 import ArmSystem from './ArmSystem'
 
+/**
+ * Base
+ */
 const gui = new dat.GUI({ closed: true, width: 400 })
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
+const width = (canvas.width = window.innerWidth)
+const height = (canvas.height = window.innerHeight)
 
-const width = window.innerWidth
-const height = window.innerHeight
-const centerX = width / 2
-const centerY = height / 2
 let mouseX = 0
 let mouseY = 0
-let raf
 
-const options = {}
-
-canvas.width = width
-canvas.height = height
-
-const armSystem = new ArmSystem({ x: centerX, y: centerY })
+const armSystem = new ArmSystem({ x: width / 2, y: height / 2 })
 for (let idx = 0; idx < 40; idx++) {
   armSystem.addArm(20)
 }

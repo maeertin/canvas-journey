@@ -2,15 +2,14 @@ import './style.css'
 import * as dat from 'dat.gui'
 import ArmSystem from './ArmSystem'
 
+/**
+ * Base
+ */
 const gui = new dat.GUI({ closed: true, width: 400 })
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
-
-const width = window.innerWidth
-const height = window.innerHeight
-const centerX = width / 2
-const centerY = height / 2
-let raf = null
+const width = (canvas.width = window.innerWidth)
+const height = (canvas.height = window.innerHeight)
 
 const options = {
   speed: 0.05,
@@ -24,10 +23,7 @@ const options = {
   bottomPhaseOffset: -1.5,
 }
 
-canvas.width = width
-canvas.height = height
-
-const leg0 = new ArmSystem({ x: centerX, y: centerY })
+const leg0 = new ArmSystem({ x: width / 2, y: height / 2 })
 leg0.addArm(
   options.topLength,
   options.topCenterAngle,
@@ -41,7 +37,7 @@ leg0.addArm(
   options.bottomPhaseOffset,
 )
 
-const leg1 = new ArmSystem({ x: centerX, y: centerY, phase: Math.PI })
+const leg1 = new ArmSystem({ x: width / 2, y: height / 2, phase: Math.PI })
 leg1.addArm(
   options.topLength,
   options.topCenterAngle,
@@ -114,7 +110,7 @@ function update() {
   leg1.update()
   leg1.render(context)
 
-  raf = requestAnimationFrame(update)
+  requestAnimationFrame(update)
 }
 
 update()

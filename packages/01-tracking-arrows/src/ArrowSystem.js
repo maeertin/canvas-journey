@@ -14,8 +14,8 @@ class ArrowSystem {
     this.targetY = y
   }
 
-  lerp(start, end, amount) {
-    return (1 - amount) * start + amount * end
+  lerp(norm, min, max) {
+    return (1 - norm) * min + norm * max
   }
 
   addArrow(length) {
@@ -45,8 +45,8 @@ class ArrowSystem {
     this.lookAt(x, y)
     this.update()
 
-    this.x = this.lerp(this.x, x, this.lerpAmount)
-    this.y = this.lerp(this.y, y, this.lerpAmount)
+    this.x = this.lerp(this.lerpAmount, this.x, x)
+    this.y = this.lerp(this.lerpAmount, this.y, y)
   }
 
   wobble(x, y) {
