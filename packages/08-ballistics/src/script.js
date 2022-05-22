@@ -1,5 +1,6 @@
 import './style.css'
 import utils from './utils'
+import Particle from './Particle'
 
 /**
  * Base
@@ -13,14 +14,51 @@ const gun = {
   y: height,
   angle: -Math.PI / 4,
 }
+const cannonball = new Particle(gun.x, gun.y, 15, gun.angle, 0.2)
+cannonball.radius = 7
+
+let canShoot = true
 
 draw()
 
-document.body.addEventListener('mousedown', onMouseDown)
+document.addEventListener('mousedown', onMouseDown)
+
+document.addEventListener('keydown', (event) => {
+  switch (event.keyCode) {
+    // spacebar
+    case 32: {
+      if (canShoot) {
+        shoot()
+      }
+      break
+    }
+  }
+})
+
+function shoot() {
+  cannonball.position.x = gun.x + Math.cos(gun.angle) * 40
+  cannonball.position.y = gun.y + Math.sin(gun.angle) * 40
+  cannonball.velocity.setLength(15)
+  cannonball.velocity.setAngle(gun.angle)
+
+  canShoot = false
+  update()
+}
+
+function update() {
+  cannonball.update()
+  draw()
+
+  if (cannonball.position.y > height) {
+    canShoot = true
+  } else {
+    requestAnimationFrame(update)
+  }
+}
 
 function onMouseDown(event) {
-  document.body.addEventListener('mousemove', onMouseMove)
-  document.body.addEventListener('mouseup', onMouseUp)
+  document.addEventListener('mousemove', onMouseMove)
+  document.addEventListener('mouseup', onMouseUp)
   aimGun(event.clientX, event.clientY)
 }
 
@@ -28,9 +66,9 @@ function onMouseMove(event) {
   aimGun(event.clientX, event.clientY)
 }
 
-function onMouseUp() {
-  document.body.removeEventListener('mousemove', onMouseMove)
-  document.body.removeEventListener('mouseup', onMouseUp)
+function onMouseUp(event) {
+  document.removeEventListener('mousemove', onMouseMove)
+  document.removeEventListener('mouseup', onMouseUp)
   aimGun(event.clientX, event.clientY)
 }
 
@@ -51,4 +89,15 @@ function draw() {
   context.rotate(gun.angle)
   context.fillRect(0, -8, 40, 16)
   context.restore()
+
+  context.beginPath()
+  context.arc(
+    cannonball.position.x,
+    cannonball.position.y,
+    cannonball.radius,
+    0,
+    Math.PI * 2,
+    false,
+  )
+  context.fill()
 }
