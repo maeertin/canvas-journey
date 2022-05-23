@@ -14,10 +14,6 @@ class ArrowSystem {
     this.targetY = y
   }
 
-  lerp(norm, min, max) {
-    return (1 - norm) * min + norm * max
-  }
-
   addArrow(length) {
     const arrow = new Arrow({ x: this.x, y: this.y, length })
     this.arrows.push(arrow)
@@ -47,10 +43,6 @@ class ArrowSystem {
 
     this.x = this.lerp(this.lerpAmount, this.x, x)
     this.y = this.lerp(this.lerpAmount, this.y, y)
-  }
-
-  wobble(x, y) {
-    // @todo: how to wobble..
   }
 
   render(context) {

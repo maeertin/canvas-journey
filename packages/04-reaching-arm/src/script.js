@@ -1,8 +1,6 @@
 import './style.css'
-import * as dat from 'dat.gui'
 import ArmSystem from './ArmSystem'
 
-const gui = new dat.GUI({ closed: true, width: 400 })
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 
@@ -12,9 +10,6 @@ const centerX = width / 2
 const centerY = height / 2
 let mouseX = 0
 let mouseY = 0
-let raf
-
-const options = {}
 
 canvas.width = width
 canvas.height = height
@@ -30,7 +25,7 @@ function update() {
   armSystem.reach(mouseX, mouseY)
   armSystem.render(context)
 
-  raf = requestAnimationFrame(update)
+  requestAnimationFrame(update)
 }
 
 document.addEventListener('mousemove', (event) => {

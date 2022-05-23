@@ -1,12 +1,9 @@
 import './style.css'
-import * as dat from 'dat.gui'
 import Particle from './Particle'
-// import Vector2 from './Vector2'
 
 /**
  * Base
  */
-const gui = new dat.GUI({ closed: true, width: 400 })
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 const width = (canvas.width = window.innerWidth)

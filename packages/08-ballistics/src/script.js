@@ -1,5 +1,5 @@
 import './style.css'
-import utils from './utils'
+import { clamp } from './utils'
 import Particle from './Particle'
 
 /**
@@ -32,6 +32,8 @@ document.addEventListener('keydown', (event) => {
       }
       break
     }
+    default:
+      break
   }
 })
 
@@ -73,7 +75,7 @@ function onMouseUp(event) {
 }
 
 function aimGun(mouseX, mouseY) {
-  gun.angle = utils.clamp(Math.atan2(mouseY - gun.y, mouseX - gun.x), -Math.PI / 2, -0.3)
+  gun.angle = clamp(Math.atan2(mouseY - gun.y, mouseX - gun.x), -Math.PI / 2, -0.3)
   draw()
 }
 

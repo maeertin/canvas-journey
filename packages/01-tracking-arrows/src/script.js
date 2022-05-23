@@ -1,11 +1,9 @@
 import './style.css'
-import * as dat from 'dat.gui'
 import ArrowSystem from './ArrowSystem'
 
 /**
  * Base
  */
-const gui = new dat.GUI({ closed: true, width: 400 })
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 const width = (canvas.width = window.innerWidth)

@@ -1,12 +1,10 @@
 import './style.css'
-import * as dat from 'dat.gui'
 import Particle from './Particle'
 import Vector2 from './Vector2'
 
 /**
  * Base
  */
-const gui = new dat.GUI({ closed: true, width: 400 })
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 const width = (canvas.width = window.innerWidth)
@@ -18,7 +16,9 @@ const height = (canvas.height = window.innerHeight)
 const ship = new Particle(width / 2, height / 2, 0, 0)
 const thrust = new Vector2(0, 0)
 let angle = 0
-let isThrusting, isTurningLeft, isTurningRight
+let isThrusting
+let isTurningLeft
+let isTurningRight
 
 document.addEventListener('keydown', (event) => {
   switch (event.key) {
@@ -30,6 +30,8 @@ document.addEventListener('keydown', (event) => {
       break
     case 'ArrowLeft':
       isTurningLeft = true
+      break
+    default:
       break
   }
 })
@@ -44,6 +46,8 @@ document.addEventListener('keyup', (event) => {
       break
     case 'ArrowLeft':
       isTurningLeft = false
+      break
+    default:
       break
   }
 })

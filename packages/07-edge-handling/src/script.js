@@ -1,12 +1,9 @@
 import './style.css'
-import * as dat from 'dat.gui'
 import Particle from './Particle'
-// import Vector2 from './Vector2'
 
 /**
  * Base
  */
-const gui = new dat.GUI({ closed: true, width: 400 })
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 const width = (canvas.width = window.innerWidth)
@@ -31,20 +28,20 @@ for (let idx = 0; idx < 100; idx++) {
   particles.push(particle)
 }
 
-function removeDeadParticles() {
-  for (let i = particles.length - 1; i >= 0; i--) {
-    const particle = particles[i]
+// function removeDeadParticles() {
+//   for (let i = particles.length - 1; i >= 0; i--) {
+//     const particle = particles[i]
 
-    if (
-      particle.position.x - particle.radius > width ||
-      particle.position.x + particle.radius < 0 ||
-      particle.position.y - particle.radius > height ||
-      particle.position.y + particle.radius < 0
-    ) {
-      particles.splice(i, 1)
-    }
-  }
-}
+//     if (
+//       particle.position.x - particle.radius > width ||
+//       particle.position.x + particle.radius < 0 ||
+//       particle.position.y - particle.radius > height ||
+//       particle.position.y + particle.radius < 0
+//     ) {
+//       particles.splice(i, 1)
+//     }
+//   }
+// }
 
 function regenParticles() {
   for (let i = particles.length - 1; i >= 0; i--) {
