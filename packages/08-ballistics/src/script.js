@@ -1,5 +1,5 @@
 import './style.css'
-import { clamp } from './utils'
+import { clamp, map } from './utils'
 import Particle from './Particle'
 
 /**
@@ -17,9 +17,12 @@ const gun = {
 const cannonball = new Particle(gun.x, gun.y, 15, gun.angle, 0.2)
 cannonball.radius = 7
 
-let canShoot = true
+let isShooting = false
+let forceAngle = 0
+let forceSpeed = 0.1
+let rawForce = 0
 
-draw()
+update()
 
 document.addEventListener('mousedown', onMouseDown)
 
@@ -27,7 +30,7 @@ document.addEventListener('keydown', (event) => {
   switch (event.keyCode) {
     // spacebar
     case 32: {
-      if (canShoot) {
+      if (!isShooting) {
         shoot()
       }
       break
@@ -40,22 +43,27 @@ document.addEventListener('keydown', (event) => {
 function shoot() {
   cannonball.position.x = gun.x + Math.cos(gun.angle) * 40
   cannonball.position.y = gun.y + Math.sin(gun.angle) * 40
-  cannonball.velocity.setLength(15)
+  cannonball.velocity.setLength(map(rawForce, -1, 1, 2, 20))
   cannonball.velocity.setAngle(gun.angle)
 
-  canShoot = false
-  update()
+  isShooting = true
 }
 
 function update() {
-  cannonball.update()
+  if (!isShooting) {
+    forceAngle += forceSpeed
+  }
+  rawForce = Math.sin(forceAngle)
+
+  if (isShooting) {
+    cannonball.update()
+  }
   draw()
 
   if (cannonball.position.y > height) {
-    canShoot = true
-  } else {
-    requestAnimationFrame(update)
+    isShooting = false
   }
+  requestAnimationFrame(update)
 }
 
 function onMouseDown(event) {
@@ -76,11 +84,16 @@ function onMouseUp(event) {
 
 function aimGun(mouseX, mouseY) {
   gun.angle = clamp(Math.atan2(mouseY - gun.y, mouseX - gun.x), -Math.PI / 2, -0.3)
-  draw()
 }
 
 function draw() {
   context.clearRect(0, 0, width, height)
+
+  context.fillStyle = '#ccc'
+  context.fillRect(10, height - 10, 20, -100)
+
+  context.fillStyle = '#666'
+  context.fillRect(10, height - 10, 20, map(rawForce, -1, 1, 0, -100))
 
   context.beginPath()
   context.arc(gun.x, gun.y, 24, 0, Math.PI * 2, false)
