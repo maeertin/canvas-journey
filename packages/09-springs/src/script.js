@@ -17,11 +17,13 @@ let elapsedTime
 let now
 
 const springPoint = new Vector2(width / 2, height / 2)
+const springLength = 100
 const weight = new Particle(
   Math.random() * width,
   Math.random() * height,
   50,
   Math.random() * Math.PI * 2,
+  0.5,
 )
 const k = 0.2
 
@@ -46,6 +48,7 @@ function update() {
   context.clearRect(0, 0, width, height)
 
   const distance = springPoint.subtract(weight.position)
+  distance.setLength(distance.getLength() - springLength)
   const springForce = distance.multiply(k)
 
   weight.velocity.addTo(springForce)
