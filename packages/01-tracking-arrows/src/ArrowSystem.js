@@ -14,6 +14,10 @@ class ArrowSystem {
     this.targetY = y
   }
 
+  lerp(norm, min, max) {
+    return (max - min) * norm + min
+  }
+
   addArrow(length) {
     const arrow = new Arrow({ x: this.x, y: this.y, length })
     this.arrows.push(arrow)

@@ -17,9 +17,9 @@ const gun = {
 const cannonball = new Particle(gun.x, gun.y, 15, gun.angle, 0.2)
 cannonball.radius = 7
 
+const forceSpeed = 0.1
 let isShooting = false
 let forceAngle = 0
-let forceSpeed = 0.1
 let rawForce = 0
 
 update()
