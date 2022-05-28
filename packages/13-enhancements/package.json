@@ -1,0 +1,16 @@
+{
+  "name": "@maeertin/13-enhancements",
+  "version": "0.0.0",
+  "private": false,
+  "author": "Martin Barri",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maeertin/canvas-journey.git",
+    "directory": "packages/13-enhancements"
+  },
+  "scripts": {
+    "build": "webpack --config ./bundler/webpack.prod.js",
+    "dev": "webpack serve --config ./bundler/webpack.dev.js"
+  }
+}

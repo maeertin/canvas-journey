@@ -38,7 +38,7 @@ class Particle {
   }
 
   angleTo(p2) {
-    return Math.atan2(p2.y - this.y, p2.x, this.x)
+    return Math.atan2(p2.y - this.y, p2.x - this.x)
   }
 
   distanceTo(p2) {
