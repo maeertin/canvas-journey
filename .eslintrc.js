@@ -1,8 +1,9 @@
 module.exports = {
   extends: ['@noaignite/eslint-config'],
   rules: {
-    curly: 'off',
+    'lines-between-class-members': 'off',
     'no-multi-assign': 'off',
     'no-plusplus': 'off',
+    curly: 'off',
   },
 }
