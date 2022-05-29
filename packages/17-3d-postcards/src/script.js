@@ -1,5 +1,4 @@
 import './style.css'
-import Particle from './Particle'
 import * as utils from './utils'
 
 /**
