@@ -4,15 +4,6 @@
 import './style.css'
 
 /**
- * Raf
- */
-const fps = 60
-const interval = 1000 / fps
-let then = Date.now()
-let elapsedTime
-let now
-
-/**
  * Base
  */
 const canvas = document.getElementById('canvas')
@@ -23,46 +14,66 @@ const height = (canvas.height = window.innerHeight)
 /**
  * Config
  */
-const start = {
+const ball = {
   x: 100,
   y: 100,
+  radius: 20,
+  alpha: 1,
 }
-const target = {}
-const change = {}
-const duration = 1_000
-let startTime
 
-drawCircle(start.x, start.y)
+tween(
+  ball,
+  {
+    x: 500,
+    y: 500,
+    alpha: 0,
+  },
+  1000,
+  easeInOutQuad,
+  render,
+  tweenBack,
+)
 
-document.addEventListener('click', (event) => {
-  target.x = event.clientX
-  target.y = event.clientY
-  change.x = target.x - start.x
-  change.y = target.y - start.y
-  startTime = new Date()
+function tweenBack() {
+  tween(ball, { x: 100, y: 100, alpha: 1 }, 1_000, easeInOutQuad, render, render)
+}
+
+function tween(obj, props, duration, easingFunc, onProgress, onComplete) {
+  const starts = {}
+  const changes = {}
+  const startTime = new Date()
+
+  Object.entries(props).forEach(([key, val]) => {
+    starts[key] = obj[key]
+    changes[key] = val - starts[key]
+  })
+
   update()
-})
 
-function update() {
-  requestAnimationFrame(update)
-
-  now = Date.now()
-  elapsedTime = now - then
-  if (elapsedTime < interval) return
-  then = now - (elapsedTime % interval)
-
-  context.clearRect(0, 0, width, height)
-
-  const time = new Date() - startTime
-  if (time < duration) {
-    const x = easeInOutQuad(time, start.x, change.x, duration)
-    const y = easeInOutQuad(time, start.y, change.y, duration)
-    drawCircle(x, y)
-  } else {
-    drawCircle(target.x, target.y)
-    start.x = target.x
-    start.y = target.y
+  function update() {
+    let time = new Date() - startTime
+    if (time < duration) {
+      Object.keys(props).forEach((key) => {
+        obj[key] = easingFunc(time, starts[key], changes[key], duration)
+      })
+      requestAnimationFrame(update)
+      onProgress?.()
+    } else {
+      Object.keys(props).forEach((key) => {
+        obj[key] = easingFunc(time, starts[key], changes[key], duration)
+      })
+      time = duration
+      onComplete?.()
+    }
   }
+}
+
+function render() {
+  context.clearRect(0, 0, width, height)
+  context.globalAlpha = ball.alpha
+  context.beginPath()
+  context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2)
+  context.fill()
 }
 
 // simple linear tweening - no easing
@@ -89,10 +100,4 @@ function easeOutQuad(t, b, c, d) {
 function easeInOutQuad(t, b, c, d) {
   if ((t /= d / 2) < 1) return (c / 2) * t * t + b
   return (-c / 2) * (--t * (t - 2) - 1) + b
-}
-
-function drawCircle(x, y) {
-  context.beginPath()
-  context.arc(x, y, 20, 0, Math.PI * 2)
-  context.fill()
 }
