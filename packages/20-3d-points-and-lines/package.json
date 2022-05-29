@@ -1,0 +1,16 @@
+{
+  "name": "@maeertin/20-3d-points-and-lines",
+  "version": "0.0.0",
+  "private": false,
+  "author": "Martin Barri",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maeertin/canvas-journey.git",
+    "directory": "packages/20-3d-points-and-lines"
+  },
+  "scripts": {
+    "build": "webpack --config ./bundler/webpack.prod.js",
+    "dev": "webpack serve --config ./bundler/webpack.dev.js"
+  }
+}
