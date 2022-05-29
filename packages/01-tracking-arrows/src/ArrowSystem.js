@@ -14,7 +14,7 @@ class ArrowSystem {
     this.targetY = y
   }
 
-  lerp(norm, min, max) {
+  static lerp(norm, min, max) {
     return (max - min) * norm + min
   }
 

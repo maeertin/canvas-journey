@@ -1,0 +1,16 @@
+{
+  "name": "@maeertin/22-3d-coordinate-rotation",
+  "version": "0.0.0",
+  "private": false,
+  "author": "Martin Barri",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maeertin/canvas-journey.git",
+    "directory": "packages/22-3d-coordinate-rotation"
+  },
+  "scripts": {
+    "build": "webpack --config ./bundler/webpack.prod.js",
+    "dev": "webpack serve --config ./bundler/webpack.dev.js"
+  }
+}
