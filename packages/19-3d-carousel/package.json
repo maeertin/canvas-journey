@@ -1,0 +1,16 @@
+{
+  "name": "@maeertin/19-3d-carousel",
+  "version": "0.0.0",
+  "private": false,
+  "author": "Martin Barri",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maeertin/canvas-journey.git",
+    "directory": "packages/19-3d-carousel"
+  },
+  "scripts": {
+    "build": "webpack --config ./bundler/webpack.prod.js",
+    "dev": "webpack serve --config ./bundler/webpack.dev.js"
+  }
+}
